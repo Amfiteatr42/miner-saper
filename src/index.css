@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --mob-body-padding: 4px;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mob-body-padding);
+  text-align: center;
+
+  @media (min-width: 700px) {
+    padding: 2rem;
+  }
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.cell-cross {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cell-cross::before,
+.cell-cross::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #3f3f3f;
+}
+.cell-cross::before {
+  rotate: 45deg;
+}
+.cell-cross::after {
+  rotate: -45deg;
+}
+
+.cell-isOpen {
+  @apply bg-white cursor-default border-l-0 border-t-0 border-r border-b border-r-slate-600 border-b-slate-600;
+}
+
+.cell {
+  @apply bg-slate-200 cursor-pointer
+  hover:bg-slate-300 hover:border-r-slate-600 hover:border-b-slate-700 hover:border-l-sky-100 hover:border-t-sky-100 
+  active:bg-slate-300 active:border-l-slate-400 active:border-t-slate-500 active:border-r-sky-100 active:border-b-sky-50;
+}
+
+.win-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('./assets/fap.png') no-repeat bottom right,
+    url('./assets/winners_hall.jpg') center/cover no-repeat;
+
+  background-size: auto, min(33vw, 33vh), cover;
+}
