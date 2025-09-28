@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { GAME_STATUS } from '../constants';
 import { Modal } from './Modal';
 import { StatisticModal } from './StatisticModal';
@@ -29,13 +29,15 @@ const winMessages = [
 
 export const GameOver = ({ gameStatus, startNewGame }) => {
   const [isStatModal, setIsStatModal] = useState(false);
+
+  const winMessage = useMemo(() => winMessages[getRandomIndex(winMessages.length - 1)], []);
+  const lostMessage = useMemo(() => lostMessages[getRandomIndex(lostMessages.length - 1)], []);
+
   return (
     <>
       {gameStatus === GAME_STATUS.WIN && (
         <div className="absolute inset-0 content-center bg-sky-800/85 text-white text-lg text-shadow-lg select-none">
-          <p className="whitespace-pre-wrap">
-            {winMessages[getRandomIndex(winMessages.length - 1)]}
-          </p>
+          <p className="whitespace-pre-wrap">{winMessage}</p>
           <button
             onClick={startNewGame}
             type="button"
@@ -53,9 +55,7 @@ export const GameOver = ({ gameStatus, startNewGame }) => {
       )}
       {gameStatus === GAME_STATUS.LOST && (
         <div className="absolute inset-0 content-center bg-pink-800/70 text-white text-lg text-shadow-lg select-none">
-          <p className="whitespace-pre-wrap">
-            {lostMessages[getRandomIndex(lostMessages.length - 1)]}
-          </p>
+          <p className="whitespace-pre-wrap">{lostMessage}</p>
           <button
             onClick={startNewGame}
             type="button"
